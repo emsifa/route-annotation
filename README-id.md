@@ -57,7 +57,7 @@ class YourController extends Controller {
 	 * @middleware 	auth
 	 * @param 		string $post_id /\d+/
 	 */
-	public function pageEditPost($post_id)
+	public function editPost($post_id)
 	{
 		// do something
 	}
@@ -94,7 +94,7 @@ Route::get('/hello/{name}/{age}', [
 ->where('age', '\d+');
 
 Route::get('/edit/{post_id}', [
-	'uses' => 'YourController@foobar',
+	'uses' => 'YourController@editPost',
 	'as' => 'post-edit',
 	'middleware' => 'auth'
 ])->where('post_id', '\d+');
