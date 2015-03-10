@@ -1,0 +1,16 @@
+{
+    "name": "emsifa/lararoute",
+    "description": "Laravel route annotation with generator for transforming route annotation into Laravel standart routing",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Muhammad Syifa",
+            "email": "emsifa@gmail.com"
+        }
+    ],
+    "autoload": {
+        "psr-4": {
+            "Emsifa\\RouteAnnotation\\": ""
+        }
+    }
+}
