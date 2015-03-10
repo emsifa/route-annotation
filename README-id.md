@@ -93,7 +93,7 @@ Route::get('/hello/{name}/{age}', [
 ->where('name', '[a-zA-Z_-]+')
 ->where('age', '\d+');
 
-Route::get('/edit/{post_id}', [
+Route::post('/edit/{post_id}', [
 	'uses' => 'YourController@editPost',
 	'as' => 'post-edit',
 	'middleware' => 'auth'
