@@ -1,5 +1,5 @@
 {
-    "name": "emsifa/lararoute",
+    "name": "emsifa/route-annotation",
     "description": "Laravel route annotation with generator for transforming route annotation into Laravel standart routing",
     "license": "MIT",
     "authors": [
