@@ -95,7 +95,7 @@ Route::get('/hello/{name}/{age}', [
 
 Route::get('/edit/{post_id}', [
 	'uses' => 'YourController@foobar',
-	'as' => 'hello',
+	'as' => 'post-edit',
 	'middleware' => 'auth'
 ])->where('post_id', '\d+');
 
