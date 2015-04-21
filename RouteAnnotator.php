@@ -87,9 +87,8 @@ class RouteAnnotator {
 	 */
 	public function annotateController($controller)
 	{
-		$controller = $this->resolveController($controller);
-
-		$controller_reflection = new ReflectionClass($controller);
+		$controller_class = $this->resolveController($controller);
+		$controller_reflection = new ReflectionClass($controller_class);
 
 		$methods = $controller_reflection->getMethods();
 
@@ -99,11 +98,11 @@ class RouteAnnotator {
 			$route_data = $this->parseMethodAnnotation($method);
 
 			if($route_data) {
-				$routes[] = $this->makeAndRegisterRoute($controller_reflection, $method, $route_data);
+				$routes[] = $this->makeAndRegisterRoute($controller, $method, $route_data);
 			}
 		}
 
-		$this->annotated_controllers[$controller] = $routes;
+		$this->annotated_controllers[$controller_class] = $routes;
 	}
 
 	/**
@@ -178,9 +177,9 @@ class RouteAnnotator {
 	 * @param string $controller
 	 * @return Illuminate\Routing\Route
 	 */
-	protected function makeAndRegisterRoute(ReflectionClass $controller, ReflectionMethod $method, array $route_data)
+	protected function makeAndRegisterRoute($controller, ReflectionMethod $method, array $route_data)
 	{
-		$uses = $controller->getShortName().'@'.$method->getName();
+		$uses = $controller.'@'.$method->getName();
 		$methods = $route_data['methods'];
 		$uri = $route_data['uri'];
 		$action = [
@@ -189,6 +188,7 @@ class RouteAnnotator {
 
 		if(!empty($route_data['middleware'])) $action['middleware'] = $route_data['middleware'];
 		if(!empty($route_data['name'])) $action['as'] = $route_data['name'];
+
 
 		$route = $this->router->match($methods, $uri,  $action);
 
